@@ -1,25 +1,47 @@
+//@import "~bootstrap/scss/bootstrap";
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+$grey: #e3e3e3;
+
+body {
+	font-size: 14px;
+}
+
 .rc-intro {
-  background-color: #222;
-  padding: 2rem;
-  text-align: center;
-  margin-bottom: 3rem;
+	background-color: #222;
+	padding: 2rem;
+	text-align: center;
+	margin-bottom: 3rem;
 }
 
 .rc-img {
-  max-width: 50px;
+	max-width: 50px;
 }
 
 .rc-title {
-  font-size: 5rem;
-  margin-top: 3rem;
-  color: #fff;
-  font-family: 'Open Sans';
-  font-weight: 700;
-  letter-spacing: -2px;
+	font-size: 5rem;
+	margin-top: 3rem;
+	color: #fff;
+	font-family: 'Open Sans';
+	font-weight: 700;
+	letter-spacing: -2px;
 }
 
 .rc-description {
-  margin-top: 2rem;
-  font-size: 2rem;
-  color: #ccc;
+	margin-top: 2rem;
+	font-size: 2rem;
+	color: #ccc;
+}
+
+/*********/
+.searchbar {
+	background: #c2dce1;
+}
+
+.bg-grey {
+	background: $grey;
+}
+
+.toolbar {
+	background: $grey;
 }
