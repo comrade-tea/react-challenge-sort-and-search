@@ -4,8 +4,10 @@ import UserData from "./UserData";
 
 class UserList extends Component {
 	render() {
-		const {users} = this.props
-		const userList = users.map(user => <li key={user.id}><UserData user={user}/></li>)
+		const {users, handleActiveUser} = this.props
+		const userList = users.map(user => <li key={user.id}>
+			<UserData user={user} handleActiveUser={handleActiveUser}/>
+		</li>)
 
 		return (
 			<div className="bg-grey p-4">

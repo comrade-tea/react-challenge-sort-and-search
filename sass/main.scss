@@ -2,9 +2,54 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
 $grey: #e3e3e3;
+$grey-dark: #dbd9d9;
+$grey-darkest: darken(#dbd9d9, 6%);
 
 body {
 	font-size: 14px;
+}
+
+ul, ol {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	li {
+
+		img {
+			max-width: 60px;
+		}
+		&:nth-child(1n+2) {
+			margin-top: 20px;
+		}
+	}
+}
+
+.UserData {
+	padding: 15px;
+	background: $grey-dark;
+	cursor: pointer;
+	transition: background .2s;
+	&:hover, &:focus {
+		background: $grey-darkest;
+	}
+}
+
+.usercard {
+	&__img-w {
+      margin-bottom: 10px;
+      img {
+        display: block;
+        max-width: 150px;
+        margin: 0 auto;
+      }
+    }
+	&__name {
+      margin-bottom: 10px;
+    }
+	&__phone {
+      margin-bottom: 10px;
+    }
+	&__phrase {}
 }
 
 .rc-intro {

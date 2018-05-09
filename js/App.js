@@ -6,16 +6,22 @@ import Toolbar from './components/Toolbar'
 import UserList from './components/UserList'
 
 
-export default class App extends Component {
+class App extends Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
-			phrase: 'Нажми на кнопку!',
-			count: 0,
-			users: []
+			users: [],
+			activeUser: null,
+			inputValue: '',
+			sortAge: null
+			/*filters: {
+				alphabetic: null,
+				age: null
+			}*/
 		};
 
-		const _this = this
+		this.types = [null, 'asc', 'des']
 
 		fetch('/data.json')
 			.then(response => response.json())
@@ -23,51 +29,74 @@ export default class App extends Component {
 			.catch(error => console.info(error));
 	}
 
-	updateBtn() {
-		const phrases = [
-			'ЖМИ!', 'Не останавливайся!',
-			'У тебя хорошо получается!', 'Красавчик!',
-			'Вот это и есть React!', 'Продолжай!',
-			'Пока ты тут нажимаешь кнопку другие работают!',
-			'Всё хватит!', 'Ну и зачем ты нажал?',
-			'В следующий раз тут будет полезный совет',
-			'Чего ты ждешь от этой кнопки?',
-			'Если дойдёшь до тысячи, то сразу научищься реакту',
-			'ой, всё!', 'Ты нажал кнопку столько раз, что обязан на ней жениться',
-			'У нас было 2 npm-пакета с реактом, 75 зависимостей от сторонних библиотек, '
-			+ '5 npm-скриптов и целое множество плагинов галпа всех сортов и расцветок, '
-			+ 'а также redux, jquery, mocha, пачка плагинов для eslint и ингерация с firebase. '
-			+ 'Не то что бы это был необходимый набор для фронтенда. Но если начал собирать '
-			+ 'вебпаком, становится трудно остановиться. Единственное, что вызывало у меня '
-			+ 'опасения - это jquery. Нет ничего более беспомощного, безответственного и испорченного, '
-			+ 'чем рядовой верстальщик без jquery. Я знал, что рано или поздно мы перейдем и на эту дрянь.',
-			'coub про кота-джедая: http://coub.com/view/spxn',
-			'Дальнобойщики на дороге ярости: http://coub.com/view/6h0dy',
-			'Реакция коллег на ваш код: http://coub.com/view/5rjjw',
-			'Енот ворует еду: http://coub.com/view/xi3cio',
-			'Российский дизайн: http://coub.com/view/16adw5i0'
-		];
-		this.setState({
-			count: this.state.count + 1,
-			phrase: phrases[parseInt(Math.random() * phrases.length)]
-		});
+	filteredUsers() {
+		const {users, inputValue} = this.state
+		const regexp = new RegExp(inputValue, 'i');
+
+		// filter by input
+		const filtered = users.filter((item) => {
+			return item.name.match(regexp)
+		})
+		// todo filter by sort
+
+		return filtered
 	}
 
 	render() {
 		return (
 			<div className="container app">
 
-				<SearchBar/>
-				<Toolbar/>
+				<SearchBar inputValue={this.state.inputValue} handleInput={this.handleInput}/>
+				<Toolbar handleSortAlpha={this.handleSortAlpha} handleSortAge={this.handleSortAge}/>
+
 				<div className='row mt-4'>
 					<div className="col-8">
-						<UserList users={this.state.users}/>
+						<UserList users={this.filteredUsers()} handleActiveUser={this.handleActiveUser}/>
 					</div>
 					<div className="col-4">
-						<ActiveUser/>
+						<ActiveUser user={this.state.activeUser}/>
 					</div>
 				</div>
 			</div>
 		);
 	}
+
+	handleInput = (ev) => {
+		const {value} = ev.target
+
+		this.setState({inputValue: value})
+	}
+
+	handleActiveUser = (id) => {
+		const {users} = this.state;
+		const activeUser = users.find((user) => user.id === id)
+
+		this.setState({activeUser: activeUser})
+	}
+
+	handleSortAlpha = () => {
+		console.log("---", 'handle sort alpha')
+	}
+
+	handleSortAge = () => {
+		//asc - возрастание
+		//des - убывание
+		const types = [null, 'asc', 'des']
+		const typesLength = types.length - 1
+		const currentIndex = types.indexOf(this.state.sortAge)
+		const nextIndex = currentIndex >= typesLength ? 0 : currentIndex + 1
+		
+		console.log("---", types[nextIndex])
+
+		this.setState({sortAge: types[nextIndex]})
+
+		/*if (!this.state.sortAge) {
+			this.setState({sortAge: types[0]})
+		}*/
+
+		/*let nextState = currentState === types.length - 1 ? 0 : ++currentState
+		this.setState({filters: {...this.state.filters, age: types[nextState]}})*/
+	}
 }
+
+export default App
