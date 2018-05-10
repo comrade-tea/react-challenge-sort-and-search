@@ -133,7 +133,7 @@ arr-diff@^4.0.0:
 
 arr-filter@^1.1.1:
   version "1.1.2"
-  resolved "http://r.cnpmjs.org/arr-filter/download/arr-filter-1.1.2.tgz#43fdddd091e8ef11aa4c45d9cdc18e2dff1711ee"
+  resolved "http://r.cnpmjs.org/arr-sort/download/arr-sort-1.1.2.tgz#43fdddd091e8ef11aa4c45d9cdc18e2dff1711ee"
   dependencies:
     make-iterator "^1.0.0"
 
@@ -1006,7 +1006,7 @@ bach@^1.0.0:
   version "1.2.0"
   resolved "http://r.cnpmjs.org/bach/download/bach-1.2.0.tgz#4b3ce96bf27134f79a1b414a51c14e34c3bd9880"
   dependencies:
-    arr-filter "^1.1.1"
+    arr-sort "^1.1.1"
     arr-flatten "^1.0.1"
     arr-map "^2.0.0"
     array-each "^1.0.0"
@@ -5469,7 +5469,7 @@ tfunk@^3.0.1:
 
 through2-filter@^2.0.0:
   version "2.0.0"
-  resolved "http://r.cnpmjs.org/through2-filter/download/through2-filter-2.0.0.tgz#60bc55a0dacb76085db1f9dae99ab43f83d622ec"
+  resolved "http://r.cnpmjs.org/through2-sort/download/through2-sort-2.0.0.tgz#60bc55a0dacb76085db1f9dae99ab43f83d622ec"
   dependencies:
     through2 "~2.0.0"
     xtend "~4.0.0"
@@ -5688,7 +5688,7 @@ unique-stream@^2.0.2:
   resolved "http://r.cnpmjs.org/unique-stream/download/unique-stream-2.2.1.tgz#5aa003cfbe94c5ff866c4e7d668bb1c4dbadb369"
   dependencies:
     json-stable-stringify "^1.0.0"
-    through2-filter "^2.0.0"
+    through2-sort "^2.0.0"
 
 universalify@^0.1.0:
   version "0.1.1"
@@ -5812,7 +5812,7 @@ vinyl-fs@^2.2.1:
     strip-bom "^2.0.0"
     strip-bom-stream "^1.0.0"
     through2 "^2.0.0"
-    through2-filter "^2.0.0"
+    through2-sort "^2.0.0"
     vali-date "^1.0.0"
     vinyl "^1.0.0"
 

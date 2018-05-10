@@ -14,14 +14,22 @@ class App extends Component {
 			users: [],
 			activeUser: null,
 			inputValue: '',
-			sortAge: null
-			/*filters: {
-				alphabetic: null,
-				age: null
-			}*/
+			sort: null,
+			sortType: null
 		};
 
-		this.types = [null, 'asc', 'des']
+		this.sorts = {
+			asc: (a, b) => {
+				const {sort} = this.state
+				if (a[sort] > b[sort]) return 1
+				if (a[sort] < b[sort]) return -1
+			},
+			des: (a, b) => {
+				const {sort} = this.state
+				if (a[sort] > b[sort]) return -1
+				if (a[sort] < b[sort]) return 1
+			}
+		}
 
 		fetch('/data.json')
 			.then(response => response.json())
@@ -34,10 +42,15 @@ class App extends Component {
 		const regexp = new RegExp(inputValue, 'i');
 
 		// filter by input
-		const filtered = users.filter((item) => {
+		let filtered = users.filter((item) => {
 			return item.name.match(regexp)
 		})
-		// todo filter by sort
+
+		// todo sort by sort
+		if (this.state.sortType) {
+			console.log("----", this.state);
+			filtered = filtered.sort(this.sorts[this.state.sortType])
+		}
 
 		return filtered
 	}
@@ -47,7 +60,7 @@ class App extends Component {
 			<div className="container app">
 
 				<SearchBar inputValue={this.state.inputValue} handleInput={this.handleInput}/>
-				<Toolbar handleSortAlpha={this.handleSortAlpha} handleSortAge={this.handleSortAge}/>
+				<Toolbar sort={this.state.sort} sortType={this.state.sortType} handleSort={this.handleSort}/>
 
 				<div className='row mt-4'>
 					<div className="col-8">
@@ -74,28 +87,20 @@ class App extends Component {
 		this.setState({activeUser: activeUser})
 	}
 
-	handleSortAlpha = () => {
-		console.log("---", 'handle sort alpha')
-	}
-
-	handleSortAge = () => {
+	handleSort = newSort => () => {
 		//asc - возрастание
 		//des - убывание
+		let {sort, sortType} = this.state
+		if (sort !== newSort) {
+			sortType = null
+		}
+
 		const types = [null, 'asc', 'des']
 		const typesLength = types.length - 1
-		const currentIndex = types.indexOf(this.state.sortAge)
+		const currentIndex = types.indexOf(sortType)
 		const nextIndex = currentIndex >= typesLength ? 0 : currentIndex + 1
-		
-		console.log("---", types[nextIndex])
 
-		this.setState({sortAge: types[nextIndex]})
-
-		/*if (!this.state.sortAge) {
-			this.setState({sortAge: types[0]})
-		}*/
-
-		/*let nextState = currentState === types.length - 1 ? 0 : ++currentState
-		this.setState({filters: {...this.state.filters, age: types[nextState]}})*/
+		this.setState({sort: newSort, sortType: types[nextIndex]})
 	}
 }
 

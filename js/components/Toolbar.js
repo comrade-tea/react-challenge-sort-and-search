@@ -3,14 +3,21 @@ import PropTypes from 'prop-types';
 
 class Toolbar extends Component {
 	render() {
-		const {handleSortAlpha, handleSortAge} = this.props
+		const {sort, sortType, handleSort} = this.props
+
+		console.log("----", this.props)
 
 		return (
 			<div className='toolbar bg-grey mt-3 py-3 px-4'>
-				<button onClick={handleSortAlpha} className='btn btn-info'>Sort in alphabet order</button>
-				<button onClick={handleSortAge} className='btn btn-secondary ml-3'>Sort by age</button>
+				<button onClick={handleSort('name')} className='btn btn-info'>Sort in alphabet order{this.getSortType('name')}</button>
+				<button onClick={handleSort('age')} className="btn btn-warning ml-3">Sort by age{this.getSortType('age')}</button>
 			</div>
 		);
+	}
+
+	getSortType(sortName) {
+		const {sort, sortType} = this.props
+		if (sortName === sort && sortType) return `: ${sortType}`
 	}
 }
 
