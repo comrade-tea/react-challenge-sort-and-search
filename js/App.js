@@ -4,6 +4,7 @@ import ActiveUser from './components/ActiveUser'
 import SearchBar from './components/SearchBar'
 import Toolbar from './components/Toolbar'
 import UserList from './components/UserList'
+// import {users} from "./data";
 
 
 class App extends Component {

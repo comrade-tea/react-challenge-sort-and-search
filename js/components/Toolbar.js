@@ -5,8 +5,6 @@ class Toolbar extends Component {
 	render() {
 		const {sort, sortType, handleSort} = this.props
 
-		console.log("----", this.props)
-
 		return (
 			<div className='toolbar bg-grey mt-3 py-3 px-4'>
 				<button onClick={handleSort('name')} className='btn btn-info'>Sort in alphabet order{this.getSortType('name')}</button>
